@@ -112,7 +112,7 @@ def show_predict_page():
             plt.title(f"Cases in {s}")
             plt.grid()
             st.pyplot(d)     
-                                                                                                 # GOOOD WORKED
+                                                                                                
 
 
     elif model == "Linear Regression":

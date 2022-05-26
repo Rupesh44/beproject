@@ -57,7 +57,7 @@ fig.update_traces(textposition='inside', textinfo='percent+label')
 # plt.show()
 
 
-image = Image.open('D:\model\covid.jpg')
+image = Image.open('covid.jpg')
 # imagep = Image.open('D:\SEMI FINAL\covidpredict.png')
 # total = world["Cases"].values[0]
 

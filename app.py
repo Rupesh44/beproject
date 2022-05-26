@@ -1,8 +1,10 @@
 import streamlit as st
+from SVM import *
 from SVM import show_predict_page
 # from predict_page import select_country
 # from predict_page import model
 from SVM import display
+from SVM import *
 from explore_page import top3
 from explore_page import fig 
 # from explore_page import fig2
@@ -19,7 +21,7 @@ with st.spinner(text='In progress'):
     time.sleep(1.5)
     st.success('Done')
 st.sidebar.title('Explore Or Predict')
-imagep = Image.open('D:\SEMI FINAL\survey.jpg')
+imagep = Image.open('survey.jpg')
 page = st.sidebar.selectbox("", ("Predict", "Explore"))
 show = st.sidebar.checkbox("Your Dataset")
 st.sidebar.image(imagep,caption='Designed by dugu', width=305)
