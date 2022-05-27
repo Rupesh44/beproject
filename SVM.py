@@ -8,6 +8,8 @@ from datetime import timedelta
 from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 from statsmodels.tsa.api import Holt
+from sklearn.metrics import r2_score
+
 
 import streamlit as st  
 import pickle 
@@ -16,7 +18,7 @@ import numpy as np
 
 imagep = Image.open('covidpredict.png')
 # st.image(imagep, width=160)
-st.image(imagep, caption="Designed by dugu", width=200, use_column_width=False, clamp=True, channels="RGB", output_format="auto")
+st.image(imagep, width=200, use_column_width=False, clamp=True, channels="RGB", output_format="auto")
 # st.write('Upload at least one file !')
 
 Files = st.file_uploader("Choose a file")
@@ -74,9 +76,9 @@ def show_predict_page():
     # data_series = data['Country'].tolist()
     data_series = File["Country"].unique()
     s = st.selectbox("Country", data_series)
+
     model = st.selectbox("Models", models)
     # select_country(s)
-
     if model == "Support Vector Machine":
         SVM = st.button("Predict")
         # if not SVM:
@@ -144,6 +146,7 @@ def show_predict_page():
 
             new_date = []
             new_prediction_lr = []
+r2score = r2_score(np.array(train_ml["Confirmed"]).reshape(-1,1),new_prediction_lr)
             for i in range(1,30):
                 new_date.append(datewise.index[-1]+timedelta(days=i))
                 new_prediction_lr.append(l.predict(np.array(datewise["Days Since"].max()+i).reshape(-1,1))[0][0])
@@ -154,7 +157,7 @@ def show_predict_page():
             # st.subheader(f"{model_predictions}")                                            # worked but not that good
             # st.dataframe(model_predictions)                                                 #   Worked but small
             st.table(model_predictions.head(5))               
-            
+            #st.write("The R^2 Score for model is :",r2score)
             d = plt.figure(figsize=(10,6))
             plt.plot(country['Date'],country['Confirmed'])
             plt.plot(new_date,new_prediction_lr, color = 'r')
@@ -310,3 +313,6 @@ def show_predict_page():
             # plt.plot(df_train['Confirmed'], label='Training data')
             # plt.plot(df_test['Confirmed'], color='gray', label='Testing data')
             # plt.legend();
+			
+			
+			
