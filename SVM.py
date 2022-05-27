@@ -146,7 +146,6 @@ def show_predict_page():
 
             new_date = []
             new_prediction_lr = []
-r2score = r2_score(np.array(train_ml["Confirmed"]).reshape(-1,1),new_prediction_lr)
             for i in range(1,30):
                 new_date.append(datewise.index[-1]+timedelta(days=i))
                 new_prediction_lr.append(l.predict(np.array(datewise["Days Since"].max()+i).reshape(-1,1))[0][0])
